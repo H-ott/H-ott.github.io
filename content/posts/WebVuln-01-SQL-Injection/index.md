@@ -55,7 +55,7 @@ description: "SQL Injection"
     -	Với kiểu tấn công này thì cần biết số lượng cột, kiểu dữ liệu của từng cột hay gọi là tham số và kiểu dữ liệu của tham số của câu lệnh ```SELECT``` trước đó vì lệnh ```UNION``` cần phải khớp về số lượng cột và kiểu dữ liệu thì mới hoạt động được. Có vẻ khó nhưng thật ra thì rất đơn giản vì để đoán được số lượng cột thì có thể viết đoạn code đơn giải rồi chạy vòng for từ 1 đến khi nào tìm được đúng số cột còn về kiểu dữ liệu thì nếu là thông tin người dùng thì thường chỉ có int, double, varchar, hay nvarchar
     -	Hoặc cách khác để biết số lượng cột là dùng ORDER BY “number” – lệnh sắp xếp trong SQL, đến khi nào nhập 1 ```number``` mà lỗi thì số ```number - 1``` là số lượng cột.
     -	```GROUP BY “number”``` – giống ORDER BY
-    -	```SELECT NULL, NULL,…-- -``` Hay ```SELECT 1, 2, 3,…-- -```. Chuỗi ```-- -``` comment hết lệnh phía sau và tránh trường hợp validate dấu cách ở cuối vì sau comment phải cách ra 1 cái thì mới hoạt động bình thường
+    -	```SELECT NULL, NULL,…-- -``` hay ```SELECT 1, 2, 3,…-- -```. Chuỗi ```-- -``` comment hết lệnh phía sau và tránh trường hợp validate dấu cách ở cuối vì sau comment phải cách ra 1 cái thì mới hoạt động bình thường
     -	Lấy tất cả các bảng trong database hiện tại(My SQL): 
       ```sql
       ' UNION SELECT table_name, NULL, NULL, ... FROM information_schema.tables--
