@@ -16,7 +16,7 @@ description: "SQL Injection"
 - SQLi sảy ra chủ yếu là do người lập trình viên không validate dữ liệu đầu vào, để người dùng có thể nhập tuỳ ý
 ## 2. Phát hiện SQLi như thế nào?
 - Có nhiều cách, dấu hiệu để có thể kết luận là một chức năng hay một trang web bị dính SQLi. Ở các function liên quan đến truy vấn và database có thể test bằng những cách như sau: 
-  - Thêm ký tự “ ‘ ” vào username, password, id, userid,… nếu lỗi không mong muốn sảy ra -> Lỗi SQLi
+  - Thêm ký tự ```‘``` vào username, password, id, userid,… nếu lỗi không mong muốn sảy ra -> Lỗi SQLi
   - Thêm chuỗi
     ```sql
     ‘OR 1=1 LIMIT 1, 1-- -
@@ -50,12 +50,12 @@ description: "SQL Injection"
        |---------------------------|------------------|
        | int với int                 | Varchar với int    |
 
-    - Trong một ứng dụng web khi yêu cầu nhập id sản phẩm là một số nguyên kiểu int tuy nhiên hacker đã nhập hàm *version()* trong mysql mà hàm này trả vể 1 chuỗi kiểu string là phiên bản hiện tại của database vậy thông báo lỗi có thể là: “"5.7.44" Cannot compare string to int!” - 5.7.44 là kết quả của hàm version().
-  - Union-based SQLi: Kiểu tấn công này cho phép hacker có thể lấy được gần như toàn bộ data trong database thông qua câu lệnh “UNION”
-    -	Với kiểu tấn công này thì cần biết số lượng cột, kiểu dữ liệu của từng cột hay gọi là tham số và kiểu dữ liệu của tham số của câu lệnh SELECT trước đó vì lệnh UNION cần phải khớp về số lượng cột và kiểu dữ liệu thì mới hoạt động được. Có vẻ khó nhưng thật ra thì rất đơn giản vì để đoán được số lượng cột thì có thể viết đoạn code đơn giải rồi chạy vòng for từ 1 đến khi nào tìm được đúng số cột còn về kiểu dữ liệu thì nếu là thông tin người dùng thì thường chỉ có int, double, varchar, hay nvarchar
-    -	Hoặc cách khác để biết số lượng cột là dùng ORDER BY “number” – lệnh sắp xếp trong SQL, đến khi nào nhập 1 “number” mà lỗi thì số number -1 là số lượng cột.
-    -	GROUP BY “number” – giống ORDER BY
-    -	SELECT NULL, NULL,…-- - Hay SELECT 1, 2, 3,…-- -. Chuỗi “-- -” comment hết lệnh phía sau và tránh trường hợp validate dấu cách ở cuối vì sau comment phải cách ra 1 cái thì mới hoạt động bình thường
+    - Trong một ứng dụng web khi yêu cầu nhập id sản phẩm là một số nguyên kiểu int tuy nhiên hacker đã nhập hàm *version()* trong mysql mà hàm này trả vể 1 chuỗi kiểu string là phiên bản hiện tại của database vậy thông báo lỗi có thể là: ```"5.7.44" Cannot compare string to int!``` - 5.7.44 là kết quả của hàm version().
+  - Union-based SQLi: Kiểu tấn công này cho phép hacker có thể lấy được gần như toàn bộ data trong database thông qua câu lệnh ```UNION```
+    -	Với kiểu tấn công này thì cần biết số lượng cột, kiểu dữ liệu của từng cột hay gọi là tham số và kiểu dữ liệu của tham số của câu lệnh ```SELECT``` trước đó vì lệnh ```UNION``` cần phải khớp về số lượng cột và kiểu dữ liệu thì mới hoạt động được. Có vẻ khó nhưng thật ra thì rất đơn giản vì để đoán được số lượng cột thì có thể viết đoạn code đơn giải rồi chạy vòng for từ 1 đến khi nào tìm được đúng số cột còn về kiểu dữ liệu thì nếu là thông tin người dùng thì thường chỉ có int, double, varchar, hay nvarchar
+    -	Hoặc cách khác để biết số lượng cột là dùng ORDER BY “number” – lệnh sắp xếp trong SQL, đến khi nào nhập 1 ```number``` mà lỗi thì số ```number - 1``` là số lượng cột.
+    -	```GROUP BY “number”``` – giống ORDER BY
+    -	```SELECT NULL, NULL,…-- -``` Hay ```SELECT 1, 2, 3,…-- -```. Chuỗi ```-- -``` comment hết lệnh phía sau và tránh trường hợp validate dấu cách ở cuối vì sau comment phải cách ra 1 cái thì mới hoạt động bình thường
     -	Lấy tất cả các bảng trong database hiện tại(My SQL): 
       ```sql
       ' UNION SELECT table_name, NULL, NULL, ... FROM information_schema.tables--
@@ -68,14 +68,14 @@ description: "SQL Injection"
     - ```sql
       page.asp?id=1 AND 1=2 -- -“ // FALSE
       ```
-    - Lấy ký tự đầu tiên của tên bảng so sánh với ‘A’ nếu đúng->True, sai->False
+    - Lấy ký tự đầu tiên của tên bảng so sánh với ```A``` nếu đúng->True, sai->False
       ```sql
       ?id=1 AND SELECT SUBSTR(table_name,1,1) FROM information_schema.tables = 'A'
       ```
     - Với kiểu khai thác này thì chủ yếu là phải viết code chạy để tìm được tên database, tên bảng, cột, data,…Nếu dùng tay thì hơi lâu
     - Thuật toán tìm kiếm nhị phân được áp dụng để khai thác lỗi SQLi này rất nhanh và phổ biến
   - Time-Based SQLi: Cũng tương tự như Boolean-based nhưng hacker sẽ khai thác dựa vào thời gian phản hồi của sever – nếu đúng thì thời gian phải hồi là sẽ lớn hơn hoặc bằng thời gian mà hacker chèn vào, còn nếu sai thì ngược lại
-    - Ví dụ: Trong payload này thì nếu ký tự đầu tiên của bảng là ‘A’ thì phải hồi sẽ là sau 10s còn nếu ko đúng sẽ < 10s
+    - Ví dụ: Trong payload này thì nếu ký tự đầu tiên của bảng là ```A``` thì phải hồi sẽ là sau 10s còn nếu ko đúng sẽ < 10s
       ```sql
       1 and (select sleep(10) from users where SUBSTR(table_name,1,1) = 'A')#
       ```
