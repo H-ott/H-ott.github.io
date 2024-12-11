@@ -56,7 +56,10 @@ description: "SQL Injection"
     -	Hoặc cách khác để biết số lượng cột là dùng ORDER BY “number” – lệnh sắp xếp trong SQL, đến khi nào nhập 1 “number” mà lỗi thì số number -1 là số lượng cột.
     -	GROUP BY “number” – giống ORDER BY
     -	SELECT NULL, NULL,…-- - Hay SELECT 1, 2, 3,…-- -. Chuỗi “-- -” comment hết lệnh phía sau và tránh trường hợp validate dấu cách ở cuối vì sau comment phải cách ra 1 cái thì mới hoạt động bình thường
-    -	Lấy tất cả các bảng trong database hiện tại(My SQL): “' UNION SELECT table_name, NULL FROM information_schema.tables--” – trường hợp này số cột ở lệnh SELECT trước là 2.
+    -	Lấy tất cả các bảng trong database hiện tại(My SQL): 
+      ```sql
+      ' UNION SELECT table_name, NULL, NULL, ... FROM information_schema.tables--
+     ```
   ### Blind-SQLi:
   - Boolean-based SQLi: là kiểu tấn công mà hacker chèn mã SQL vào thì sever sẽ trả về 2 kiểu khác nhau ví dụ như: True – False, Found – Not Found, Yes – No,…
     - ```sql
