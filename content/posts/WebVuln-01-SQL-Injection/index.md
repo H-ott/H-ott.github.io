@@ -113,7 +113,7 @@ description: "SQL Injection"
   - Khắc phục nhanh chóng, tìm và fix lại chỗ bị lỗi SQLi
   - Sau khi đã chắc chắn là an toàn thì khởi động lại hệ thống
   <br>
-=>  "Nên phòng bệnh hơn là chữa bệnh"
+=>  "Nên phòng bệnh hơn là chữa bệnh✅"
 ## 8. Tổng kết
 SQL Injection - SQLi thuộc loại **Technical vulnerability** là một lỗ hổng bảo mật nghiêm trọng và nguy hiểm trong các ứng dụng web, app,... Với nhiều biến thể tấn công nó ảnh hưởng trực tiếp đến 3 cạnh của tam giác bảo mật CIA. SQLi có thể bỏ qua xác thực người dùng, xem, thêm, sửa, xoá dữ liệu của database gây ảnh hưởng lớn đến hệ thống. Mặc dù hiện nay không còn phổ biến như trước tuy nhiên nếu không cẩn thận vẫn sẽ mắc phải
 # Tài liệu tham khảo:
