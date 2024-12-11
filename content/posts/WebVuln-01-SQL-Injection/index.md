@@ -80,7 +80,7 @@ description: "SQL Injection"
       1 and (select sleep(10) from users where SUBSTR(table_name,1,1) = 'A')#
       ```
 ## 5. Ảnh hưởng của lỗ hổng SQLi đến tam giác CIA như thế nào?
-  ### Tam giác CIA
+  ### Tam giác CIA:
    - Tam Giác CIA là tam giác đại diện cho độ an toàn của một ứng dụng thông qua 3 quy chuẩn sau để đánh giá độ an toàn, bảo mật của hệ thống đến đâu:
      - C – Confidental (Tính bảo mật)✅
      - I – Intergrity (Tính toàn vẹn)✅
