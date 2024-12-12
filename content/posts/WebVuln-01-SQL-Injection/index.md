@@ -33,8 +33,9 @@ description: "SQL Injection"
    ```
 
 ## 2. Khái niệm về SQL Injection - SQL Injection là gì?
-- SQLi là một kỹ thuật tấn công cho phép kẻ tấn công chèn một untrusted data vào những chức làm việc với các truy vấn SQL cho phép tương tác với database trong ứng dụng như các form đăng nhập, đăng ký, hay url có chứa id của các bài post -> nhằm biến những thứ bất thường thành bình thường
-- SQLi sảy ra chủ yếu là do người lập trình viên không validate dữ liệu đầu vào, để người dùng có thể nhập tuỳ ý
+- SQLi là một kỹ thuật tấn công cho phép kẻ tấn công chèn(Inject) những lệnh SQL độc hại vào những nơi có thể nhập dữ liệu của hệ thống để từ có thể khai thác được các thông tin từ database. Cũng có thể nói là SQLi là tấn công vào database thông qua các giá trị input của ứng dụng.
+- Ý tưởng cốt lõi là lợi dụng việc kiểm tra đầu vào của người dùng không kỹ để có thể đánh lừa được ứng dụng Web và qua mặt các hàng bảo vệ của hệ thống bằng việc tạo ra những mã SQL bất thường và biến nó thành bình thường để sever có thể chạy được sau đó lấy ra được những thông tin nhạy cảm(Email, SĐT,...).
+- SQLi sảy ra chủ yếu là do người lập trình viên không validate dữ liệu đầu vào, để người dùng có thể nhập dữ liệu tuỳ ý.
 ## 3. Phát hiện SQLi như thế nào?
 - Có nhiều cách, dấu hiệu để có thể kết luận là một chức năng hay một trang web bị dính SQLi. Ở các function liên quan đến truy vấn và database có thể test bằng những cách như sau: 
   - Thêm ký tự ```‘``` vào username, password, id, userid,… nếu lỗi không mong muốn sảy ra -> Lỗi SQLi
@@ -145,7 +146,7 @@ description: "SQL Injection"
 SQL Injection - SQLi thuộc loại **Technical vulnerability** là một lỗ hổng bảo mật nghiêm trọng và nguy hiểm trong các ứng dụng web, app,... Với nhiều biến thể tấn công nó ảnh hưởng trực tiếp đến 3 cạnh của tam giác bảo mật CIA. SQLi có thể bỏ qua xác thực người dùng, xem, thêm, sửa, xoá dữ liệu của database gây ảnh hưởng lớn đến hệ thống. Mặc dù hiện nay không còn phổ biến như trước tuy nhiên nếu không cẩn thận vẫn sẽ mắc phải
 # Tài liệu tham khảo:
 -	[TAS Blog - Web penetration testing fundamental (1)](https://tlualgosec.com/posts/Blog101/)
+-	[Cookie hanhoan](https://cookiearena.org/hoc-pentester/sql-injection-mon-qua-cua-hacker-trong-dem-giang-sinh/)
+-	[Toidicodedao](https://toidicodedao.com/2016/11/15/lo-hong-sql-injection-than-thanh/)
 -	[Hackstrick](https://book.hacktricks.xyz/pentesting-web/sql-injection)
 -	[Invicti.com](https://www.invicti.com/learn/sql-injection-sqli/)
--	[Cookie hanhoan](https://www.youtube.com/watch?v=Eg0jjrYr8GU)
--	[Toidicodedao](https://toidicodedao.com/2016/11/15/lo-hong-sql-injection-than-thanh/)
