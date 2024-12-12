@@ -10,7 +10,7 @@ toc:
 description: "SQL Injection"
 ---
 # Phân tích về lỗ hổng SQL Injection - SQLi: 
-  SQLi là một loại lỗ hổng thuộc loại **Technical vulnerability**. Trong bài này thì mình sẽ nói về: SQL là gì? -> Khái niệm SQL Injection -> Phát hiện SQL Injection như thế nào? –> Các dạng SQL Injection hay gặp -> Cách khai thác SQL Injection như thế nào? -> Mức độ ảnh hưởng của SQL Injection đến tam giác CIA -> Các trường hợp đặc biệt của SQL Injection -> Cách phòng chống SQL Injection và cách xử lý khi bị tấn công SQL Injection <br>
+  SQLi là một loại lỗ hổng thuộc loại [**Technical vulnerability**](https://tlualgosec.com/posts/Blog101/#2-ph%C3%A2n-loa%CC%A3i-l%C3%B4%CC%83-h%C3%B4%CC%89ng). Trong bài này thì mình sẽ nói về: SQL là gì? -> Khái niệm SQL Injection -> Phát hiện SQL Injection như thế nào? –> Các dạng SQL Injection hay gặp -> Cách khai thác SQL Injection như thế nào? -> Mức độ ảnh hưởng của SQL Injection đến tam giác CIA -> Các trường hợp đặc biệt của SQL Injection -> Cách phòng chống SQL Injection và cách xử lý khi bị tấn công SQL Injection <br>
 ## 1. SQL là gì?
 - SQL - Structured Query Language: là một ngôn ngữ truy vấn có cấu trúc thường được dùng để thao tác, làm việc với cơ sở dữ liệu. Ví dụ như việc lấy ra thông tin người dùng đang được lưu trong database, thêm một người dùng mới, sửa thông tin khách hàng hay xoá một người dùng ra khỏi database
 - Mỗi kiểu database sẽ có những cấu trúc của các lệnh SQL khác nhau nhưng đều mang 1 ý nghĩa chung.
