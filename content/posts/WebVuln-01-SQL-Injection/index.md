@@ -65,7 +65,7 @@ description: "SQL Injection"
       ```
     - Lấy tất cả các bảng trong database hiện tại(My SQL):
       ```sql
-      SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema=DATABASE()
+      ', TABLE_NAME FROM information_schema.tables WHERE table_schema=DATABASE()
       ```
     - ```http://chall.tlualgosec.com:1337/post/1+1``` - sau post chính ra là id của bài post là 1 số nguyên nhưng nhập ```1+1``` vẫn được chấp nhập và trả về bài post có id là ```2```.
   - Error-based: là một dạng khác của In-band SQLi, kiểu tấn công này thì hacker sẽ tận dụng những thông báo lỗi khi chạy lệnh SQL từ phía sever hiển thị ra màn hình từ đó tận dụng khai thác. Cách khai thác lỗi này giống với việc khai thác In-band tuy nhiên hacker cần cố tình tạo ra 1 câu lệnh SQL sai với cú pháp hoặc logic của ngôn ngữ SQL nhằm tạo ra lỗi và hiển thị nó ra màn hình và từ lỗi hiển thị ra đó sẽ có thể chứa thông tin về database,…
