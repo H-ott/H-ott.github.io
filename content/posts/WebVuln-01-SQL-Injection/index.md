@@ -37,7 +37,7 @@ description: "SQL Injection"
 - Ý tưởng cốt lõi là lợi dụng việc kiểm tra đầu vào của người dùng không kỹ để có thể đánh lừa được ứng dụng Web và qua mặt các hàng bảo vệ của hệ thống bằng việc tạo ra những mã SQL bất thường và biến nó thành bình thường để sever có thể chạy được sau đó lấy ra được những thông tin nhạy cảm(Email, SĐT,...).
 - SQLi sảy ra chủ yếu là do người lập trình viên không validate dữ liệu đầu vào, để người dùng có thể nhập dữ liệu tuỳ ý.
 ## 3. Phát hiện SQLi như thế nào?
-- Có nhiều cách, dấu hiệu để có thể kết luận là một chức năng hay một trang web bị dính SQLi. Ở các function liên quan đến truy vấn và database có thể test bằng những cách như sau: 
+- Có nhiều cách, dấu hiệu để có thể kết luận là một chức năng hay một trang web bị dính SQLi. Khi được phép test một ứng dụng có thể thử bằng những cách như sau: 
   - Thêm ký tự ```‘``` vào username, password, id, userid,… nếu lỗi không mong muốn sảy ra -> Lỗi SQLi
   - Thêm chuỗi
     ```sql
