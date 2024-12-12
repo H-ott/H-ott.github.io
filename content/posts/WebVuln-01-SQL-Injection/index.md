@@ -95,7 +95,28 @@ description: "SQL Injection"
       ?id=1 AND SELECT SUBSTR(table_name,1,1) FROM information_schema.tables = 'A'
       ```
     - Với kiểu khai thác này thì chủ yếu là phải viết code chạy để tìm được tên database, tên bảng, cột, data,…Nếu dùng tay thì hơi lâu
-    - Thuật toán tìm kiếm nhị phân được áp dụng để khai thác lỗi SQLi này rất nhanh và phổ biến
+    - Thuật toán tìm kiếm nhị phân được áp dụng để khai thác lỗi SQLi này rất nhanh và phổ biến. Bên dưới là mã giả minh hoạ để lấy flag có độ dài là 45 ký tự vào các ký tự có các số tương ứng trong bảng ascii từ 0 đến 200 bằng chặt nhị phân
+    ```python
+	flag = "" # giả sử flag dài 45 ký tự
+    for i in range(1, 45):
+		print(i)
+		l, r = 0, 200
+		while l <= r:
+	   		m = (l + r) // 2 # Lấy ra số ở giữa l và r
+    		#Chuyển số m thành ký tự tương ứng trong bảng ascii
+    		#Nếu đúng là ký tự cần tìm thì break vì đã tìm được ký tự cần tìm;
+	   		if "Ký tự cần tìm" == chr(m)
+    			break;
+    		#Nếu chưa phải là ký tự cần tìm thì so sánh chr(m) với "Ký tự cần tìm"
+    			ĐK = "Ký tự cần tìm" > chr(m)
+    		#Nếu ĐK đúng thì chỉ cần tìm đoạn từ m + 1 -> 200
+	   		if ĐK==True:
+	   			l = m + 1
+    		#Ngược lại nếu ĐK sai tức là ký tự đó nằm trong đoạn từ 1 -> m - 1
+	   		else: r = m - 1
+	   	flag += chr(m) # cộng "ký tự cần tìm" vào chuỗi flag
+	   	print(flag) # ghi flag
+    ```
   - Time-Based SQLi: Cũng tương tự như Boolean-based nhưng hacker sẽ khai thác dựa vào thời gian phản hồi của sever – nếu đúng thì thời gian phải hồi là sẽ lớn hơn hoặc bằng thời gian mà hacker chèn vào, còn nếu sai thì ngược lại
     - Ví dụ: Trong payload này thì nếu ký tự đầu tiên của bảng là ```A``` thì phải hồi sẽ là sau 10s còn nếu ko đúng sẽ < 10s
       ```sql
