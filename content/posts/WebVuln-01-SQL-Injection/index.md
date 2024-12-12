@@ -33,7 +33,7 @@ description: "SQL Injection"
    ```
 
 ## 2. Khái niệm về SQL Injection - SQL Injection là gì?
-- SQLi là một kỹ thuật tấn công cho phép kẻ tấn công chèn(Inject) những lệnh SQL độc hại vào những nơi có thể nhập dữ liệu của hệ thống để từ có thể khai thác được các thông tin từ database. Cũng có thể nói là SQLi là tấn công vào database thông qua các giá trị input của ứng dụng.
+- SQLi là một kỹ thuật tấn công cho phép kẻ tấn công chèn(Inject) những lệnh SQL độc hại vào những nơi có thể nhập dữ liệu của hệ thống như các form login, signin, thanh tìm kiếm, url có chứa tham số,... để từ đó có thể khai thác được các thông tin từ database. Cũng có thể nói là SQLi là tấn công vào database thông qua các giá trị input của ứng dụng.
 - Ý tưởng cốt lõi là lợi dụng việc kiểm tra đầu vào của người dùng không kỹ để có thể đánh lừa được ứng dụng Web và qua mặt các hàng bảo vệ của hệ thống bằng việc tạo ra những mã SQL bất thường và biến nó thành bình thường để sever có thể chạy được sau đó lấy ra được những thông tin nhạy cảm(Email, SĐT,...).
 - SQLi sảy ra chủ yếu là do người lập trình viên không validate dữ liệu đầu vào, để người dùng có thể nhập dữ liệu tuỳ ý.
 ## 3. Phát hiện SQLi như thế nào?
