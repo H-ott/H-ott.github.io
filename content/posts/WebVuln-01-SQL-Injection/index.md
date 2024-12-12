@@ -10,11 +10,32 @@ toc:
 description: "SQL Injection"
 ---
 # Phân tích về lỗ hổng SQL Injection - SQLi: 
-  SQLi là một loại lỗ hổng thuộc loại **Technical vulnerability**. Trong bài này thì mình sẽ nói về: Khái niệm SQLi -> Phát hiện SQLi như thế nào? –> Các dạng SQLi hay gặp -> Cách khai thác SQLi như thế nào? -> Mức độ ảnh hưởng đến tam giác CIA -> Các trường hợp đặc biệt của SQLi -> Cách phòng chống SQLi và cách xử lý khi bị tấn công SQLi <br>
-## 1. Khái niệm về SQL Injection - SQL Injection là gì?
+  SQLi là một loại lỗ hổng thuộc loại **Technical vulnerability**. Trong bài này thì mình sẽ nói về: SQL là gì? -> Khái niệm SQL Injection -> Phát hiện SQL Injection như thế nào? –> Các dạng SQL Injection hay gặp -> Cách khai thác SQL Injection như thế nào? -> Mức độ ảnh hưởng của SQL Injection đến tam giác CIA -> Các trường hợp đặc biệt của SQL Injection -> Cách phòng chống SQL Injection và cách xử lý khi bị tấn công SQL Injection <br>
+## 1. SQL là gì?
+- SQL - Structured Query Language: là một ngôn ngữ truy vấn có cấu trúc thường được dùng để thao tác, làm việc với cơ sở dữ liệu. Ví dụ như việc lấy ra thông tin người dùng đang được lưu trong database, thêm một người dùng mới, sửa thông tin khách hàng hay xoá một người dùng ra khỏi database
+- Mỗi kiểu database sẽ có những cấu trúc của các lệnh SQL khác nhau nhưng đều mang 1 ý nghĩa chung.
+- Một vài ví dụ về lệnh SQL:
+  - Lấy ra tất cả người dùng có user_id = 1 trong bảng users bằng lệnh ```SELECT```
+   ```sql
+   SELECT * FROM users WHERE user_id = '1'
+   ```
+  - Thêm các giá trị ```admin``` và ```admin``` lần lượt vào các cột ```username``` và ```password``` trong bảng users bằng lệnh ```INSERT INTO```
+   ```sql
+   INSERT INTO users(username, password) VALUES('admin', 'admin')
+   ```
+  - Thay đổi ```password``` của ```username = admin``` thành ```admin123``` bằng lệnh ```UPDATE```
+   ```sql
+   UPDATE users SET password = 'admin123' WHERE username = 'admin'
+   ```
+  - Xoá người dùng có ```username = admin``` bằng lệnh ```DELETE```
+   ```sql
+   DELETE FROM users WHERE username = 'admin'
+   ```
+
+## 2. Khái niệm về SQL Injection - SQL Injection là gì?
 - SQLi là một kỹ thuật tấn công cho phép kẻ tấn công chèn một untrusted data vào những chức làm việc với các truy vấn SQL cho phép tương tác với database trong ứng dụng như các form đăng nhập, đăng ký, hay url có chứa id của các bài post -> nhằm biến những thứ bất thường thành bình thường
 - SQLi sảy ra chủ yếu là do người lập trình viên không validate dữ liệu đầu vào, để người dùng có thể nhập tuỳ ý
-## 2. Phát hiện SQLi như thế nào?
+## 3. Phát hiện SQLi như thế nào?
 - Có nhiều cách, dấu hiệu để có thể kết luận là một chức năng hay một trang web bị dính SQLi. Ở các function liên quan đến truy vấn và database có thể test bằng những cách như sau: 
   - Thêm ký tự ```‘``` vào username, password, id, userid,… nếu lỗi không mong muốn sảy ra -> Lỗi SQLi
   - Thêm chuỗi
@@ -25,11 +46,11 @@ description: "SQL Injection"
   - Dùng tính năng scan lỗ hổng SQLi trong Burpsuite
   - Dùng tools: [sqlmap](https://github.com/sqlmapproject/sqlmap),…
   - Và còn rất nhiều cách để phát hiện SQLi – Tham khảo: https://book.hacktricks.xyz/pentesting-web/sql-injection
-## 3. Các dạng SQLi hay gặp
+## 4. Các dạng SQLi hay gặp
 -	Dạng đầu tiên của SQLi là In-band SQLi – Classic SQLi: Đây là 1 kiểu tấn công mà khi chèn SQL kẻ tấn công có thể thấy được và nhận được kết quả trực tiếp ngay trên chính giao diện trang web đó. Ví dụ như bạn tấn công vào form đăng nhập thì kết quả là bạn sẽ thấy và vào được tài khoản người dùng.
 -	Một dạng khác là Blind SQLi: Dạng này là dạng mà khi chèn SQL thì sever chỉ phản hồi về cho kẻ tấn công 2 trạng thái khác nhau từ đó hacker có thể dựa vào nó để đoán tên database, table, column hay thậm chí là cả data trong hệ thống.
 -	Out-of-band SQLi: Đây là kiểu tấn công mà hacker không nhận được phản hồi trực tiếp từ 1 kênh của ứng dụng mà thông qua kênh khác. Kiểu tấn công này ít phổ biến hơn 2 kiểu trên vì nó còn phụ thuộc vào yếu tố khác
-## 4. Cách khai thác với các dạng SQLi hay gặp như thế nào?
+## 5. Cách khai thác với các dạng SQLi hay gặp như thế nào?
   ### In-band(classic) SQLi: 
   - In-band: Kiểu này khá đơn giản vì kẻ tấn công có thể trực tiếp quan sát được kết quả từ đó có thể tư duy, logic để khai thác hiệu quả:
     - ```sql
@@ -42,7 +63,7 @@ description: "SQL Injection"
       ```sql
       SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema=DATABASE()
       ```
-    - ```http://chall.tlualgosec.com:1337/post/1+1``` - sau post chính ra là id của bài post là 1 số nguyên nhưng nhập "1+1" vẫn được chấp nhập và trả về bài post có id là 2.
+    - ```http://chall.tlualgosec.com:1337/post/1+1``` - sau post chính ra là id của bài post là 1 số nguyên nhưng nhập ```1+1``` vẫn được chấp nhập và trả về bài post có id là ```2```.
   - Error-based: là một dạng khác của In-band SQLi, kiểu tấn công này thì hacker sẽ tận dụng những thông báo lỗi khi chạy lệnh SQL từ phía sever hiển thị ra màn hình từ đó tận dụng khai thác. Cách khai thác lỗi này giống với việc khai thác In-band tuy nhiên hacker cần cố tình tạo ra 1 câu lệnh SQL sai với cú pháp hoặc logic của ngôn ngữ SQL nhằm tạo ra lỗi và hiển thị nó ra màn hình và từ lỗi hiển thị ra đó sẽ có thể chứa thông tin về database,…
     - Ví dụ: khi so sánh<br>
     
@@ -61,7 +82,7 @@ description: "SQL Injection"
       ' UNION SELECT table_name, NULL, NULL, ... FROM information_schema.tables--
      ```
   ### Blind-SQLi:
-  - Boolean-based SQLi: là kiểu tấn công mà hacker chèn mã SQL vào thì sever sẽ trả về 2 kiểu khác nhau ví dụ như: True – False, Found – Not Found, Yes – No,…
+  - Boolean-based SQLi: là kiểu tấn công mà hacker chèn mã SQL vào thì sever sẽ trả về 2 kiểu trạng thái khác nhau ví dụ như: True – False, Found – Not Found, Yes – No,…
     - ```sql
       page.asp?id=1 AND 1=1 -- -“ // True
       ```
@@ -79,7 +100,7 @@ description: "SQL Injection"
       ```sql
       1 and (select sleep(10) from users where SUBSTR(table_name,1,1) = 'A')#
       ```
-## 5. Ảnh hưởng của lỗ hổng SQLi đến tam giác CIA như thế nào?
+## 6. Ảnh hưởng của lỗ hổng SQLi đến tam giác CIA như thế nào?
   ### Tam giác CIA:
    - Tam Giác CIA là tam giác đại diện cho độ an toàn của một ứng dụng thông qua 3 quy chuẩn sau để đánh giá độ an toàn, bảo mật của hệ thống đến đâu:
      - C – Confidental (Tính bảo mật)✅
@@ -92,7 +113,7 @@ description: "SQL Injection"
      - Tiếp theo nếu dữ liệu trong database bị xoá khi chèn thêm lệnh DELETE thì tính sẵn sàng của hệ thống cũng bị mất -> vi phạm tính sẵn sàng(A)❌<br>
       
 	 => Vậy có thể kết luận là lỗ hổng SQLi có thể vi phạm đến tất cả các cạnh của tam giác CIA - SQLi nằm ở vị trí cao trong top 10 OWASP💢
-## 6. Trường hợp đặc biệt của lỗ hổng SQLi
+## 7. Trường hợp đặc biệt của lỗ hổng SQLi
 - SQLi to Remote code excution(SQLi to RCE):<br>
   Ví dụ: Payload cho phép ghi lệnh system php vào file shell.php vào trong hệ thống
   ```sql
@@ -103,7 +124,7 @@ description: "SQL Injection"
   http://domain/shell.php?cmd=whoami
   ```
 - Out-of-band SQL injection
-## 7. Phòng chống SQL Injection như thế nào - Làm gì khi bị SQLi?
+## 8. Phòng chống SQL Injection như thế nào - Làm gì khi bị SQLi?
 - SQL Injection rất nguy hiểm và dễ khai thác vì vậy nên những năm gần đây có vẻ như SQLi có vẻ đã "tuyệt chủng" khi ít còn xuất hiện nhiều như những năm đầu vậy có 1 số cách phòng chống SQLi phổ biến như sau:
   - "Đừng tin người dùng" - Bất cứ ở đâu cho phép người dùng nhập data luôn phải validate cả front-end và back-end
   - Sử dụng thư viện có sẵn, an toàn để tạo các truy vấn SQL đến database
@@ -120,7 +141,7 @@ description: "SQL Injection"
   - Sau khi đã chắc chắn là an toàn thì khởi động lại hệ thống
   <br>
 =>  "Nên phòng bệnh hơn là chữa bệnh✅"
-## 8. Tổng kết
+## 9. Tổng kết
 SQL Injection - SQLi thuộc loại **Technical vulnerability** là một lỗ hổng bảo mật nghiêm trọng và nguy hiểm trong các ứng dụng web, app,... Với nhiều biến thể tấn công nó ảnh hưởng trực tiếp đến 3 cạnh của tam giác bảo mật CIA. SQLi có thể bỏ qua xác thực người dùng, xem, thêm, sửa, xoá dữ liệu của database gây ảnh hưởng lớn đến hệ thống. Mặc dù hiện nay không còn phổ biến như trước tuy nhiên nếu không cẩn thận vẫn sẽ mắc phải
 # Tài liệu tham khảo:
 -	[TAS Blog - Web penetration testing fundamental (1)](https://tlualgosec.com/posts/Blog101/)
