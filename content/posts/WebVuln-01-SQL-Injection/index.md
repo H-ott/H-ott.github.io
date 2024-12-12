@@ -45,7 +45,10 @@ description: "SQL Injection"
     ```
     vào sau password và username có trong hệ thống nếu có thể truy cập được tài khoản một ai đó -> Lỗi SQLi
   - Dùng tính năng scan lỗ hổng SQLi trong Burpsuite
-  - Dùng tools: [sqlmap](https://github.com/sqlmapproject/sqlmap),…
+  - Dùng tools: [sqlmap](https://github.com/sqlmapproject/sqlmap) - Bên dưới là lệnh để lấy các bảng trong database, nơi bị SQLi là tham số ```id``` sau ```post/```
+    ```python
+    sqlmap -u "http://domain:1337/post/1" --dbms=mysql --tables
+    ```
   - Và còn rất nhiều cách để phát hiện SQLi – Tham khảo: https://book.hacktricks.xyz/pentesting-web/sql-injection
 ## 4. Các dạng SQLi hay gặp
 -	Dạng đầu tiên của SQLi là In-band SQLi – Classic SQLi: Đây là 1 kiểu tấn công mà khi chèn SQL kẻ tấn công có thể thấy được và nhận được kết quả trực tiếp ngay trên chính giao diện trang web đó. Ví dụ như bạn tấn công vào form đăng nhập thì kết quả là bạn sẽ thấy và vào được tài khoản người dùng.
