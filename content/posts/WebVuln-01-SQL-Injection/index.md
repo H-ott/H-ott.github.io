@@ -38,7 +38,7 @@ description: "SQL Injection"
     - ```sql
       page.asp?id=1 or 1=1 -- -
       ```
-    - Lấy tất cả các cột trong database hiện tại(My SQL):
+    - Lấy tất cả các bảng trong database hiện tại(My SQL):
       ```sql
       SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema=DATABASE()
       ```
