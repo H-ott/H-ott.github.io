@@ -47,3 +47,12 @@ description: "OS Command Injection"
     là có thể ngay sau lệnh ping thì sẽ hiển thị file passwd trong hệ thống.
     - Bypass 4 ký tự, 5 ký tự.
     - ```'l's, 'i'd,...```
+## 4. OS command injection ảnh hưởng đến tam giác CIA như thế nào?
+Lỗ hổng OS command là một lỗ hổng rất nguy hiểm ảnh hưởng trực tiếp đến hệ thống vậy nên nó ảnh hưởng rõ rệt đến cả 3 cạnh của tam giác bảo mật CIA:
+### Tính bảo mật - C - Confidental: 
+  OS command injection có thể làm lộ các file nhạy cảm hệ thống, thông tin người dùng,...
+### Tính toàn vẹn - I - Intergrity
+  Lỗ hổng này có thể xoá dữ liệu quan trọng,...
+### Tính sẵn sàng - A - Availability
+  Tắt hoặc tạm dừng các dịch dụ đang chạy,...
+## 5. Trường hợp đặc biệt
