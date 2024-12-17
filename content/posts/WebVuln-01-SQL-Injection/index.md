@@ -49,7 +49,7 @@ description: "SQL Injection"
     ```python
     sqlmap -u "http://domain:1337/post/1" --dbms=mysql --tables
     ```
-  - Và còn rất nhiều cách để phát hiện SQLi – Tham khảo: https://book.hacktricks.xyz/pentesting-web/sql-injection.
+  - Và còn rất nhiều cách để phát hiện SQLi – [Tham khảo](https://book.hacktricks.xyz/pentesting-web/sql-injection).
 ## 4. Các dạng SQLi hay gặp
 -	In-band SQLi – Classic SQLi: Đây là 1 kiểu tấn công phổ biến và dễ khai khác nhất của SQL Injection. Ở dạng này kẻ tấn công có thể thấy được và nhận được kết quả trực tiếp ngay trên chính giao diện trang web đó. Ví dụ như bạn tấn công vào form đăng nhập thì kết quả là bạn sẽ thấy và vào được tài khoản người dùng.
 -	Blind SQLi: Kiểu này cũng phổ biến tuy nhiên khó khai thác hơn một chút. Dạng này là dạng mà khi chèn SQL thì sever chỉ phản hồi về cho kẻ tấn công 2 trạng thái khác nhau từ đó hacker có thể dựa vào 2 trạng thái đó để có thể đoán, suy luận ra tên database, table, column hay thậm chí là cả data trong hệ thống. Để thực hiện kiểu tấn công này cần kết hợp với lập trình thì mới có thể có hiệu quả cao và nhanh.
