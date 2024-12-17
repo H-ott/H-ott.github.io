@@ -33,10 +33,10 @@ description: "OS Command Injection"
   - Ví dụ:
     - Khi có thể vào được tài khoản admin thì sau khi chèn được lệnh hệ thống bạn có thể xoá cả sever, phân quyền admin cho bất cứ người dùng nào,...
     - Ví dụ ở chức năng ping của 1 trang web được lập trình viên viết bằng php như sau:
-     ```php
-     $host = $_GET['host'];
-     $result = system("ping {$host}");
-     echo ($result);
+    ```php
+      $host = $_GET['host'];
+      $result = system("ping {$host}");
+      echo ($result);
      ```
     Cho phép người dùng nhập giá trị host nếu giá trị host không được validate kỹ thì có thể nhập như sau ```"8.8.8.8" | cat /etc/passwd"``` để được:
       ```php
