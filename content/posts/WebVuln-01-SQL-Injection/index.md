@@ -57,6 +57,7 @@ description: "SQL Injection"
 ## 5. Cách khai thác với các dạng SQLi hay gặp như thế nào?
   ### In-band(classic) SQLi: 
   - In-band: Kiểu này khá đơn giản vì kẻ tấn công có thể trực tiếp quan sát được kết quả từ đó có thể tư duy, logic để khai thác hiệu quả:
+    - Dùng burpsuite để chạy từ điển tìm lỗi. 
     - ```sql
       ‘OR 1=1 LIMIT 1,1-- -
       ```
