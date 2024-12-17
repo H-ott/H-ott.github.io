@@ -56,3 +56,6 @@ Lỗ hổng OS command là một lỗ hổng rất nguy hiểm ảnh hưởng tr
 ### Tính sẵn sàng - A - Availability
   Tắt hoặc tạm dừng các dịch dụ đang chạy,...
 ## 5. Trường hợp đặc biệt
+# Tài liệu tham khảo
+- [hackstrick](https://book.hacktricks.xyz/pentesting-web/command-injection)
+- [Cookie hanhoang](https://www.youtube.com/watch?v=v1jHmttSWtM)
