@@ -26,6 +26,24 @@ description: "OS Command Injection"
     - ```google.com || sleep 5```
     - ```google.com; `sleep 5'```
     - ```google.com=$(sleep 5)```
-    - Bypass 4 ký tự, 5 ký tự.
   - Nhiều cách khác - [Tham khảo](https://book.hacktricks.xyz/pentesting-web/command-injection)
-- Chú ý là khi chèn lệnh cần đúng với cú pháp của câu lệnh lập trình viên viết và lệnh hệ thống để lệnh có thể chạy được, ví dụ thiếu dấu ```'``` thì phải thêm ```'```, thừa thì thêm dấu commment ```#```
+- Chú ý là khi chèn lệnh cần đúng với cú pháp của câu lệnh lập trình viên viết và lệnh hệ thống để lệnh có thể chạy được, ví dụ thiếu dấu ```'``` thì phải thêm ```'```, thừa thì thêm dấu commment ```#```.
+## 3. Cách khai thác OS command injection
+  - Khi một chức năng bị lỗ hổng này có thể khai thác bằng nhiều cách và lấy được rất nhiều thông tin vì đây là lỗ hổng vô cùng nguy hiểm hacker có thể chiếm quyền toàn bộ ứng dụng của bạn
+  - Ví dụ:
+    - Khi có thể vào được tài khoản admin thì sau khi chèn được lệnh hệ thống bạn có thể xoá cả sever, phân quyền admin cho bất cứ người dùng nào,...
+    - Ví dụ ở chức năng ping của 1 trang web được lập trình viên viết bằng php như sau:
+     ```php
+     $host = $_GET['host'];
+     $result = system("ping {$host}");
+     echo ($result);
+     ```
+    Cho phép người dùng nhập giá trị host nếu giá trị host không được validate kỹ thì có thể nhập như sau ```"8.8.8.8" | cat /etc/passwd"``` để được:
+      ```php
+      $host = $_GET['host'];
+      $result = system("ping "8.8.8.8" | cat /etc/passwd");
+      echo ($result);
+      ```
+    là có thể ngay sau lệnh ping thì sẽ hiển thị file passwd trong hệ thống.
+    - Bypass 4 ký tự, 5 ký tự.
+    - ```'l's, 'i'd,...```
