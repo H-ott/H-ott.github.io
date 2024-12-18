@@ -71,11 +71,16 @@ description: "SQL Injection"
     - ```http://chall.tlualgosec.com:1337/post/1+1``` - sau post chính ra là id của bài post là 1 số nguyên nhưng nhập ```1+1``` vẫn được chấp nhập và trả về bài post có id là ```2```.
   - Error-based: là một dạng khác của In-band SQLi, kiểu tấn công này thì hacker sẽ tận dụng những thông báo lỗi khi chạy lệnh SQL từ phía sever hiển thị ra màn hình từ đó tận dụng khai thác. Cách khai thác lỗi này giống với việc khai thác In-band tuy nhiên hacker cần cố tình tạo ra 1 câu lệnh SQL sai với cú pháp hoặc logic của ngôn ngữ SQL nhằm tạo ra lỗi và hiển thị nó ra màn hình và từ lỗi hiển thị ra đó sẽ có thể chứa thông tin về database,…
     - Ví dụ: khi so sánh<br>
-    
-       | Bình thường->không lỗi    | Khác thường->lỗi |
-       |---------------------------|------------------|
-       | int với int                 | Varchar với int    |
-
+    	<table border="1" style="border-collapse: collapse; width: 50%; margin: 20px auto; text-align: center;">
+        <tr>
+            <th>Bình thường</th>
+            <th>Khác thường</th>
+        </tr>
+        <tr>
+            <td>int với int</td>
+            <td>Varchar với int</td>
+        </tr>
+    	</table>
     - Trong một ứng dụng web khi yêu cầu nhập id sản phẩm là một số nguyên kiểu int tuy nhiên hacker đã nhập hàm *version()* trong mysql mà hàm này trả vể 1 chuỗi kiểu string là phiên bản hiện tại của database vậy thông báo lỗi có thể là: ```"5.7.44" Cannot compare string to int!``` - 5.7.44 là kết quả của hàm version().
   - Union-based SQLi: Kiểu tấn công này cho phép hacker có thể lấy được gần như toàn bộ data trong database thông qua câu lệnh ```UNION```
     -	Với kiểu tấn công này thì cần biết số lượng cột, kiểu dữ liệu của từng cột hay gọi là tham số và kiểu dữ liệu của tham số của câu lệnh ```SELECT``` trước đó vì lệnh ```UNION``` cần phải khớp về số lượng cột và kiểu dữ liệu thì mới hoạt động được. Có vẻ khó nhưng thật ra thì rất đơn giản vì để đoán được số lượng cột thì có thể viết đoạn code đơn giải rồi chạy vòng for từ 1 đến khi nào tìm được đúng số cột còn về kiểu dữ liệu thì nếu là thông tin người dùng thì thường chỉ có int, double, varchar, hay nvarchar.
